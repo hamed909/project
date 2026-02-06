@@ -1,7 +1,10 @@
 package ui;
 
 import javax.swing.*;
+
 import java.awt.*;
+
+
 
 import data.AppData;
 import model.*;
@@ -46,6 +49,8 @@ public class LoginFrame extends JFrame {
             String u = usernameField.getText();
             String p = new String(passwordField.getPassword());
             boolean wantSeller = sellerCheck.isSelected();
+
+
 
             for(User user : AppData.users){
                 if(user.username.equals(u) && user.password.equals(p)){
