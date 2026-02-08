@@ -69,7 +69,8 @@ public class BasketFrame extends JFrame {
             itemPanel.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 
             JPanel info = new JPanel(new GridLayout(3,1));
-            JLabel lbl = new JLabel(ci.product.getName()+" | Price: "+ci.product.getPrice()+" | Qty: "+ci.quantity);
+            JLabel lbl = new JLabel(ci.product.getName()+" | Price: "+ci.product.getPrice()+" | Qty: "+ci.quantity
+        +" | Description: "+ci.product.getDescription());
             info.add(lbl);
             itemPanel.add(info, BorderLayout.CENTER);
 
