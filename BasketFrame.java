@@ -55,10 +55,7 @@ public class BasketFrame extends JFrame {
                 AppData.currentUser.clearBasket();
                 AppData.saveAllData(); // ذخیره پس از خرید
                 JOptionPane.showMessageDialog(this,"Payment successful! Total: "+total);
-                items.removeAll();
                 refreshItems(items);
-                items.revalidate();
-                items.repaint();
             } else {
                 JOptionPane.showMessageDialog(this,"Insufficient balance!");
             }
@@ -82,17 +79,30 @@ public class BasketFrame extends JFrame {
             btns.add(plus); btns.add(minus);
             itemPanel.add(btns, BorderLayout.SOUTH);
 
-            plus.addActionListener(e -> {
-                ci.quantity++;
-                AppData.saveAllData(); // ذخیره پس از تغییر تعداد
-                lbl.setText(ci.product.getName()+" | Price: "+ci.product.getPrice()+" | Qty: "+ci.quantity);
-            });
+        plus.addActionListener(e -> {
+            if (ci.quantity < ci.product.getStock()) {
+            ci.quantity++;
+            AppData.saveAllData();
 
+            lbl.setText(ci.product.getName()+" | Price: "+ci.product.getPrice()+" | Qty: "+ci.quantity
+            +" | Description: "+ci.product.getDescription());
+
+
+    } else {
+        JOptionPane.showMessageDialog(
+            BasketFrame.this,
+            "Not enough stock available!",
+            "Stock limit",
+            JOptionPane.WARNING_MESSAGE
+        );
+    }
+});
             minus.addActionListener(e -> {
                 if(ci.quantity>1){
                     ci.quantity--;
                     AppData.saveAllData(); // ذخیره پس از تغییر تعداد
-                    lbl.setText(ci.product.getName()+" | Price: "+ci.product.getPrice()+" | Qty: "+ci.quantity);
+                    lbl.setText(ci.product.getName()+" | Price: "+ci.product.getPrice()+" | Qty: "+ci.quantity
+                +" | Description: "+ci.product.getDescription());
                 } else {
                     AppData.currentUser.cart.remove(ci);
                     items.remove(itemPanel);
@@ -101,6 +111,7 @@ public class BasketFrame extends JFrame {
                     items.repaint();
                 }
             });
+
 
             items.add(itemPanel);
         }
