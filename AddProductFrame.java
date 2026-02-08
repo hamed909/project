@@ -34,7 +34,7 @@ public class AddProductFrame extends JFrame {
         header.setPreferredSize(new Dimension(100,40));
         main.add(header, BorderLayout.NORTH);
 
-        // ================= Form =================
+
         JPanel form = new JPanel(new GridLayout(6,2,10,10));
         form.setBorder(BorderFactory.createEmptyBorder(20,30,20,30));
 
@@ -53,7 +53,7 @@ public class AddProductFrame extends JFrame {
         form.add(new JLabel("Description"));
         form.add(descriptionField);
 
-        // ================= Image chooser =================
+
         JPanel imagePanel = new JPanel(new BorderLayout(5,5));
         JButton imageBtn = new JButton("Choose Image");
         imagePreview.setBorder(BorderFactory.createLineBorder(Color.GRAY));
@@ -66,7 +66,7 @@ public class AddProductFrame extends JFrame {
 
         main.add(form, BorderLayout.CENTER);
 
-        // ================= Bottom buttons =================
+
         JPanel bottom = new JPanel();
         JButton backBtn = new JButton("Back");
         JButton addBtn = new JButton("Add");
@@ -77,7 +77,7 @@ public class AddProductFrame extends JFrame {
         main.add(bottom, BorderLayout.SOUTH);
         add(main);
 
-        // ================= Image chooser logic =================
+
         imageBtn.addActionListener(e -> {
             JFileChooser chooser = new JFileChooser();
             chooser.setFileFilter(
@@ -114,7 +114,7 @@ public class AddProductFrame extends JFrame {
             }
         });
 
-        // ================= Add product =================
+
         addBtn.addActionListener(e -> {
             if (AppData.currentUser == null ||
                 !AppData.currentUser.role.equals("seller")) {
@@ -128,6 +128,8 @@ public class AddProductFrame extends JFrame {
                 String name = titleField.getText();
                 double price = Double.parseDouble(priceField.getText());
                 int stock = Integer.parseInt(stockField.getText());
+                if(!availableBox.isSelected())
+                stock = 0;
                 String desc = descriptionField.getText();
 
                 AppData.catalog.addProduct(
@@ -143,7 +145,6 @@ public class AddProductFrame extends JFrame {
                 JOptionPane.showMessageDialog(this,
                         "Product added successfully!");
 
-                // reset form
                 titleField.setText("");
                 priceField.setText("");
                 stockField.setText("");
