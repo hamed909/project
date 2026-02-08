@@ -44,7 +44,7 @@ public class LoginFrame extends JFrame {
         main.add(buttons, BorderLayout.SOUTH);
         add(main);
 
-        // ================= Action Listeners =================
+      
         signIn.addActionListener(e -> {
             String u = usernameField.getText();
             String p = new String(passwordField.getPassword());
