@@ -36,7 +36,6 @@ public class AppData {
             } catch(Exception e){ e.printStackTrace(); }
         }
 
-        // بارگذاری کاربران و سبد خرید
         File userFile = new File(USERS_FILE);
         if(userFile.exists()){
             try(Scanner sc = new Scanner(userFile)){
@@ -63,7 +62,7 @@ public class AppData {
         }
     }
 
-    // ================= Save Data =================
+    
     public static void saveAllData(){
         // ذخیره محصولات
         try(PrintWriter out = new PrintWriter(new FileWriter(PRODUCTS_FILE))){
